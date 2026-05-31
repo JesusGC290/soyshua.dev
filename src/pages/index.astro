@@ -73,9 +73,14 @@ const faqs = [
   },
 ];
 
+const socialLinks = [
+  { label: "Instagram", href: "https://instagram.com/soyshua.dev" },
+  { label: "TikTok", href: "https://tiktok.com/@soyshua.dev" },
+];
+
 const footerLinks = [
   { label: "Nei Digital", href: "https://neidigital.com" },
-  { label: "Instagram", href: "https://instagram.com/soyshua" },
+  ...socialLinks,
   { label: "LinkedIn", href: "https://linkedin.com/in/soyshua" },
 ];
 
@@ -283,7 +288,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
                 class={`absolute left-1/2 top-1/2 flex h-[285px] w-[210px] flex-col justify-between rounded-2xl border border-[#1C1917]/10 bg-white p-5 shadow-2xl ${card.transform}`}
               >
                 <div class="flex items-center justify-between font-inter text-xs text-[#1C1917]/60">
-                  <span class="font-medium text-[#1C1917]">soyshua_</span>
+                  <span class="font-medium text-[#1C1917]">soyshua.dev</span>
                   <span>{card.number}</span>
                 </div>
 
@@ -569,6 +574,22 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
               Mi enfoque no es la teoría. Mi objetivo es que digitalices tus procesos, reduzcas el trabajo manual y
               prepares tu negocio para integrar Nei Digital y escalar.
             </p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-4">
+            {
+              socialLinks.map((link) => (
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label} de soyshua.dev`}
+                  class="font-inter text-sm text-[#1C1917]/60 transition hover:text-[#78866B]"
+                >
+                  @soyshua.dev · {link.label}
+                </a>
+              ))
+            }
           </div>
         </div>
 
