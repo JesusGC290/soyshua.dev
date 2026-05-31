@@ -1,0 +1,692 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import profilePhoto from "../img/soyshua.jpg";
+
+const bentoCards = [
+  {
+    number: "Nº 01",
+    title: "Calculadora IA de Equilibrio",
+    description: "Prompt exacto para calcular tu punto de equilibrio en 10 segundos.",
+    tag: "PDF + Prompt",
+    href: "#descargar",
+    icon: "calculator",
+    iconClass: "bg-[#78866B] text-[#F5F5F4]",
+  },
+  {
+    number: "Nº 02",
+    title: "Estandarización de Procesos",
+    description: "Plantillas listas para ordenar la operación diaria y reducir errores manuales.",
+    tag: "Plantilla / PDF",
+    href: "#descargar",
+    icon: "document",
+    iconClass: "bg-[#78866B] text-[#F5F5F4]",
+  },
+  {
+    number: "Nº 03",
+    title: "Reto 90 Días",
+    description: "Implementación intensiva de Nei Digital para sistematizar todo tu negocio.",
+    tag: "Nei Digital",
+    href: "https://nei.digital/landing/transformacion-digital-90-dias",
+    external: true,
+    icon: "rocket",
+    iconClass: "bg-[#78866B] text-[#F5F5F4]",
+  },
+];
+
+const metrics = [
+  { value: "+500h", label: "En el rush" },
+  { value: "+10k", label: "Líneas de código" },
+  { value: "1", label: "SaaS Gastronómico" },
+];
+
+const benefits = [
+  {
+    title: "Control de Inventarios",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt.",
+    icon: "inventory",
+  },
+  {
+    title: "Estandarización de Procesos",
+    description: "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
+    icon: "process",
+  },
+  {
+    title: "Automatización con IA",
+    description: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+    icon: "ai",
+  },
+];
+
+const faqs = [
+  {
+    question: "¿Para quién es este contenido?",
+    answer: "Para dueños de restaurantes que quieren usar IA y software para salir del caos operativo.",
+  },
+  {
+    question: "¿Qué es Nei Digital?",
+    answer: "Mi SaaS institucional. Es el software B2B donde aplicamos todo lo que enseño aquí.",
+  },
+  {
+    question: "¿Cómo funciona el Reto 90 días?",
+    answer: "Es una auditoría y setup intensivo donde implementamos Nei Digital en tu operación.",
+  },
+];
+
+const footerLinks = [
+  { label: "Nei Digital", href: "https://neidigital.com" },
+  { label: "Instagram", href: "https://instagram.com/soyshua" },
+  { label: "LinkedIn", href: "https://linkedin.com/in/soyshua" },
+];
+
+const leadStackCards = [
+  {
+    number: "Nº 01",
+    title: "Calculadora IA",
+    transform: "-translate-x-[140px] -translate-y-1/2 -rotate-6 z-10",
+  },
+  {
+    number: "Nº 02",
+    title: "Manual Operativo",
+    transform: "-translate-x-1/2 -translate-y-1/2 rotate-0 z-20",
+  },
+  {
+    number: "Nº 03",
+    title: "Automatización",
+    transform: "translate-x-[40px] -translate-y-1/2 rotate-6 z-10",
+  },
+];
+
+const leadBenefits = [
+  "Aprende a calcular tu punto de equilibrio.",
+  "Plantillas para estandarizar tu operación.",
+  "Guías enfocadas en sistematización.",
+];
+
+const cardClasses =
+  "bg-white/80 backdrop-blur-md border border-[#1C1917]/10 shadow-[0_4px_20px_-4px_rgba(28,25,23,0.05)] rounded-2xl";
+
+const bentoCardClasses =
+  "group flex flex-col p-6 sm:p-8 bg-white/80 backdrop-blur-md rounded-2xl border border-[#1C1917]/10 shadow-[0_4px_20px_-4px_rgba(28,25,23,0.05)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-[#78866B]/30";
+
+const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-[#1C1917] sm:text-4xl lg:text-5xl";
+---
+
+<Layout
+  title="Shua | No te enseño a cocinar. Te enseño a sistematizar."
+  description="Soy Shua. Te enseño a implementar IA, estandarizar procesos y escalar tu operación sin perder la cabeza."
+>
+  <style is:global>
+    details summary {
+      list-style: none;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+
+  <main class="min-h-screen text-[#1C1917]">
+    <!-- A. Hero Section -->
+    <section class="px-4 py-24 sm:px-6 sm:py-32 lg:py-40">
+      <div class="mx-auto max-w-5xl text-center">
+        <div class="mb-6 flex justify-center">
+          <div
+            class="inline-flex items-center gap-2.5 rounded-full border border-[#1C1917]/10 bg-white/70 px-4 py-2 shadow-[0_2px_12px_-2px_rgba(28,25,23,0.08)] backdrop-blur-sm"
+          >
+            <span class="h-2 w-2 shrink-0 rounded-full bg-[#78866B]" aria-hidden="true"></span>
+            <span class="font-inter text-sm text-[#1C1917]/80 sm:text-base">
+              +100 negocios sistematizando su caos operativo
+            </span>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-start sm:justify-center sm:gap-8 lg:gap-12">
+          <span
+            class="hidden shrink-0 font-['Outfit'] text-3xl font-light text-[#78866B] sm:block lg:text-4xl"
+            aria-hidden="true"
+          >
+            &lt; /
+          </span>
+
+          <h1 class="font-outfit text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+            No te enseño a cocinar.
+            <br />
+            <span class="text-accent text-6xl sm:text-7xl lg:text-8xl">Te enseño a</span>
+            <br />
+            <i>
+              <span class="text-accent text-7xl sm:text-8xl lg:text-9xl">sistematizar.</span>
+            </i>
+          </h1>
+
+          <span
+            class="hidden shrink-0 font-['Outfit'] text-3xl font-light text-[#78866B] sm:block lg:text-4xl"
+            aria-hidden="true"
+          >
+            &gt;
+          </span>
+        </div>
+
+        <p class="mx-auto mt-8 max-w-2xl font-inter text-lg leading-relaxed text-[#1C1917]/80 sm:text-xl">
+          Soy Shua. Te enseño a implementar IA, estandarizar procesos y escalar tu operación sin perder la cabeza.
+        </p>
+      </div>
+    </section>
+
+    <!-- C. Bento Cards -->
+    <section class="px-4 pb-20 sm:px-6 sm:pb-28" id="recursos">
+      <div class="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3 md:gap-8">
+        {
+          bentoCards.map((card) => (
+            <a
+              href={card.href}
+              target={card.external ? "_blank" : undefined}
+              rel={card.external ? "noopener noreferrer" : undefined}
+              class={bentoCardClasses}
+            >
+              <div class="flex items-start justify-between">
+                <div class={`flex items-center justify-center w-12 h-12 rounded-xl ${card.iconClass}`}>
+                  {card.icon === "calculator" && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <rect width="16" height="20" x="4" y="2" rx="2" />
+                      <line x1="8" x2="16" y1="6" y2="6" />
+                      <line x1="16" x2="16" y1="14" y2="18" />
+                      <path d="M16 10h.01" />
+                      <path d="M12 10h.01" />
+                      <path d="M8 10h.01" />
+                      <path d="M12 14h.01" />
+                      <path d="M8 14h.01" />
+                      <path d="M12 18h.01" />
+                      <path d="M8 18h.01" />
+                    </svg>
+                  )}
+                  {card.icon === "document" && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                      <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                      <path d="m9 15 2 2 4-4" />
+                    </svg>
+                  )}
+                  {card.icon === "rocket" && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                      <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                      <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                      <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                    </svg>
+                  )}
+                </div>
+                <span class="font-outfit text-sm text-[#1C1917]/40">{card.number}</span>
+              </div>
+
+              <h2 class="mt-5 font-outfit text-2xl font-bold tracking-tight text-[#1C1917]">{card.title}</h2>
+
+              <p class="mt-3 grow font-inter text-sm leading-relaxed text-[#1C1917]/65 transition-colors duration-300 group-hover:text-[#1C1917]/80 sm:text-base">
+                {card.description}
+              </p>
+
+              <span class="mt-auto pt-6">
+                <span class="inline-flex items-center gap-2 rounded-full bg-[#1C1917]/5 px-3 py-1.5 font-inter text-sm text-[#1C1917]/70">
+                  <span class="h-1.5 w-1.5 shrink-0 rounded-full bg-[#78866B]" aria-hidden="true" />
+                  {card.tag}
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- D. Lead Capture -->
+    <section class="px-4 py-20 sm:px-6 sm:py-28" id="descargar">
+      <div
+        class="mx-auto grid w-full max-w-5xl grid-cols-1 overflow-hidden rounded-[32px] border border-[#1C1917]/10 bg-white shadow-xl md:grid-cols-2"
+      >
+        <!-- Columna izquierda: composición de tarjetas -->
+        <div class="relative hidden min-h-[440px] bg-[#F5F5F4] md:block" aria-hidden="true">
+          {
+            leadStackCards.map((card) => (
+              <article
+                class={`absolute left-1/2 top-1/2 flex h-[285px] w-[210px] flex-col justify-between rounded-2xl border border-[#1C1917]/10 bg-white p-5 shadow-2xl ${card.transform}`}
+              >
+                <div class="flex items-center justify-between font-inter text-xs text-[#1C1917]/60">
+                  <span class="font-medium text-[#1C1917]">soyshua_</span>
+                  <span>{card.number}</span>
+                </div>
+
+                <div class="space-y-2.5 py-2">
+                  <div class="h-2 w-full rounded-full bg-[#1C1917]/5" />
+                  <div class="h-2 w-4/5 rounded-full bg-[#1C1917]/5" />
+                  <div class="h-16 w-full rounded-xl bg-[#78866B]/10" />
+                  <div class="h-2 w-3/5 rounded-full bg-[#1C1917]/5" />
+                </div>
+
+                <div>
+                  <h3 class="font-['Outfit'] text-lg font-bold leading-tight text-[#1C1917]">{card.title}</h3>
+                  <span class="mt-3 inline-flex items-center gap-1.5 rounded-full border border-[#1C1917]/10 bg-[#F5F5F4] px-2.5 py-1 font-inter text-xs font-medium text-[#1C1917]/80">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[#78866B]" aria-hidden="true" />
+                    Gratis
+                  </span>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <!-- Columna derecha: copy y formulario -->
+        <div class="flex flex-col items-start p-8 sm:p-12">
+          <span
+            class="inline-flex items-center rounded-full border border-[#1C1917]/10 bg-[#1C1917]/5 px-3 py-1 font-inter text-xs font-medium tracking-wide text-[#1C1917]"
+          >
+            GRATIS · HERRAMIENTAS
+          </span>
+
+          <h2 class={`mt-6 ${sectionTitleClasses}`}>
+            Descarga gratis<i> mis herramientas</i><i class="text-[#78866B]"> operativas.</i>
+          </h2>
+
+          <ul class="mt-8 w-full space-y-3">
+            {
+              leadBenefits.map((benefit) => (
+                <li class="flex items-start gap-3 font-inter text-base text-[#1C1917]/80 sm:text-lg">
+                  <span
+                    class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#78866B]/20 text-xs font-bold text-[#78866B]"
+                    aria-hidden="true"
+                  >
+                    ✓
+                  </span>
+                  <span>{benefit}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <form id="lead-form" class="mt-8 w-full space-y-4" action="#" method="post" novalidate>
+            <div class="flex flex-col gap-3 sm:flex-row sm:gap-3">
+              <label for="name-lead" class="sr-only">Nombre</label>
+              <input
+                id="name-lead"
+                type="text"
+                name="name"
+                placeholder="Tu nombre"
+                required
+                autocomplete="name"
+                class="min-w-0 flex-1 rounded-2xl border border-[#1C1917]/10 bg-[#F5F5F4] px-4 py-3 font-inter text-[#1C1917] placeholder:text-[#1C1917]/40 focus:border-[#78866B] focus:outline-none focus:ring-2 focus:ring-[#78866B]"
+              />
+              <label for="email-lead" class="sr-only">Correo electrónico</label>
+              <input
+                id="email-lead"
+                type="email"
+                name="email"
+                placeholder="tu@email.com"
+                required
+                autocomplete="email"
+                class="min-w-0 flex-1 rounded-2xl border border-[#1C1917]/10 bg-[#F5F5F4] px-4 py-3 font-inter text-[#1C1917] placeholder:text-[#1C1917]/40 focus:border-[#78866B] focus:outline-none focus:ring-2 focus:ring-[#78866B]"
+              />
+            </div>
+            <button
+              type="submit"
+              class="w-full rounded-2xl bg-[#78866B] px-6 py-3.5 font-['Outfit'] text-base font-bold text-[#F5F5F4] transition hover:bg-[#6a7760] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78866B] disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              Recibir las herramientas gratis
+            </button>
+          </form>
+
+          <p class="mt-4 font-inter text-sm text-[#1C1917]/50">Cero spam. Acceso inmediato a los PDF.</p>
+          <p id="lead-form-status" class="mt-2 hidden font-inter text-sm" role="status" aria-live="polite" />
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const leadForm = document.getElementById("lead-form");
+      const leadStatus = document.getElementById("lead-form-status");
+
+      type LeadStatusTone = "success" | "error" | "neutral";
+
+      leadForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        if (!(form instanceof HTMLFormElement)) return;
+
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (!(submitButton instanceof HTMLButtonElement)) return;
+
+        const nameInput = form.querySelector("#name-lead");
+        const emailInput = form.querySelector("#email-lead");
+        if (!(nameInput instanceof HTMLInputElement) || !(emailInput instanceof HTMLInputElement)) return;
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+
+        if (!name || !email) {
+          showLeadStatus("Completa tu nombre y correo para continuar.", "error");
+          return;
+        }
+
+        const endpoint = form.getAttribute("data-endpoint");
+        if (!endpoint) {
+          showLeadStatus("Listo. Revisa tu correo para acceder a los PDF.", "success");
+          return;
+        }
+
+        submitButton.disabled = true;
+        showLeadStatus("Enviando…", "neutral");
+
+        try {
+          const response = await fetch(endpoint, {
+            method: form.method || "POST",
+            headers: { Accept: "application/json", "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email }),
+          });
+
+          if (!response.ok) {
+            throw new Error("submit_failed");
+          }
+
+          form.reset();
+          showLeadStatus("Listo. Revisa tu correo para acceder a los PDF.", "success");
+        } catch {
+          showLeadStatus("No pudimos enviar el formulario. Intenta de nuevo en un momento.", "error");
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+
+      function showLeadStatus(message: string, tone: LeadStatusTone) {
+        if (!leadStatus) return;
+
+        leadStatus.textContent = message;
+        leadStatus.classList.remove("hidden", "text-[#78866B]", "text-red-600", "text-[#1C1917]/60");
+
+        if (tone === "success") {
+          leadStatus.classList.add("text-[#78866B]");
+        } else if (tone === "error") {
+          leadStatus.classList.add("text-red-600");
+        } else {
+          leadStatus.classList.add("text-[#1C1917]/60");
+        }
+      }
+    </script>
+
+    <!-- E. Métricas -->
+    <section class="px-4 py-12 sm:px-6 sm:py-16" aria-label="Métricas">
+      <div
+        class={`mx-auto flex max-w-4xl flex-col items-center justify-center gap-10 px-8 py-10 sm:flex-row sm:gap-16 sm:px-12 sm:py-12 lg:gap-24 ${cardClasses}`}
+      >
+        {
+          metrics.map((metric) => (
+            <div class="text-center">
+              <p class="font-['Outfit'] text-4xl font-bold tracking-tight sm:text-5xl">{metric.value}</p>
+              <p class="mt-1 font-['Inter'] text-sm text-[#1C1917]/60">{metric.label}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- F. Beneficios -->
+    <section class="px-4 py-20 sm:px-6 sm:py-28">
+      <div class="mx-auto max-w-6xl">
+        <h2 class={`mb-12 ${sectionTitleClasses}`}>
+          Termina con<i> la talacha</i><i class="text-[#78866B]"> operativa.</i>
+        </h2>
+
+        <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
+          {
+            benefits.map((item) => (
+              <article class={`p-8 sm:p-10 ${cardClasses}`}>
+                <div class="mb-4 text-[#78866B]">
+                  {item.icon === "inventory" && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                      <line x1="12" y1="22.08" x2="12" y2="12" />
+                    </svg>
+                  )}
+                  {item.icon === "process" && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <line x1="8" y1="6" x2="21" y2="6" />
+                      <line x1="8" y1="12" x2="21" y2="12" />
+                      <line x1="8" y1="18" x2="21" y2="18" />
+                      <line x1="3" y1="6" x2="3.01" y2="6" />
+                      <line x1="3" y1="12" x2="3.01" y2="12" />
+                      <line x1="3" y1="18" x2="3.01" y2="18" />
+                    </svg>
+                  )}
+                  {item.icon === "ai" && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 2a4 4 0 0 1 4 4c0 1.95-1.4 3.57-3.25 3.87" />
+                      <path d="M12 2a4 4 0 0 0-4 4c0 1.95 1.4 3.57 3.25 3.87" />
+                      <path d="M12 22a4 4 0 0 0 4-4c0-1.95-1.4-3.57-3.25-3.87" />
+                      <path d="M12 22a4 4 0 0 1-4-4c0-1.95 1.4-3.57 3.25-3.87" />
+                      <circle cx="12" cy="12" r="2" />
+                    </svg>
+                  )}
+                </div>
+                <h3 class="font-['Outfit'] text-xl font-bold">{item.title}</h3>
+                <p class="mt-2 font-['Inter'] text-base leading-relaxed text-[#1C1917]/70">{item.description}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- G. Sobre Mí -->
+    <section class="px-4 py-24 sm:px-6" id="sobre-mi" aria-labelledby="sobre-mi-heading">
+      <div class="mx-auto grid max-w-5xl grid-cols-1 gap-12 sm:grid-cols-2 sm:items-center">
+        <div class="order-2 sm:order-1">
+          <div class="mb-6">
+            <div
+              class="inline-flex items-center rounded-full border border-[#1C1917]/10 bg-white/70 px-4 py-2 shadow-[0_2px_12px_-2px_rgba(28,25,23,0.08)] backdrop-blur-sm"
+            >
+              <span class="font-inter text-sm text-[#1C1917]/80 sm:text-base">sobre mí</span>
+            </div>
+          </div>
+
+          <h2 id="sobre-mi-heading" class={sectionTitleClasses}>
+            No soy chef,<i> soy</i><i class="text-[#78866B]"> Developer.</i>
+          </h2>
+
+          <div class="mt-8 space-y-4 font-inter text-base leading-relaxed text-[#1C1917]/80 sm:text-lg">
+            <p>
+              Hace tiempo solo escribía código. Hoy me meto a la operación real de los negocios gastronómicos para
+              entender el caos administrativo desde adentro y resolverlo con software.
+            </p>
+            <p>
+              Actualmente documento todo mi proceso en público. Creo contenido, manuales y herramientas basadas en
+              Inteligencia Artificial para automatizar y estandarizar restaurantes.
+            </p>
+            <p>
+              Mi enfoque no es la teoría. Mi objetivo es que digitalices tus procesos, reduzcas el trabajo manual y
+              prepares tu negocio para integrar Nei Digital y escalar.
+            </p>
+          </div>
+        </div>
+
+        <div class="order-1 sm:order-2">
+          <div class="relative mx-auto max-w-sm">
+            <div class="relative aspect-[4/5] overflow-hidden rounded-[36px] border border-[#1C1917]/10 shadow-lg">
+              <Image
+                src={profilePhoto}
+                alt="Shua — Developer en la operación gastronómica"
+                width={384}
+                height={480}
+                widths={[384, 768]}
+                sizes="(max-width: 640px) 100vw, 384px"
+                class="h-full w-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <span
+              class="absolute -left-3 top-6 z-10 -rotate-6 rounded-full border border-[#1C1917]/5 bg-white px-4 py-2 font-inter text-sm font-medium text-[#78866B] shadow-md sm:-left-6"
+              aria-hidden="true"
+            >
+              Build in Public 🚀
+            </span>
+
+            <span
+              class="absolute -right-2 top-4 z-10 flex h-12 w-12 rotate-12 items-center justify-center rounded-2xl border border-[#1C1917]/5 bg-white text-xl shadow-md sm:-right-4"
+              aria-hidden="true"
+            >
+              ⚙️
+            </span>
+
+            <span
+              class="absolute -bottom-3 left-2 z-10 -rotate-3 rounded-full border border-[#1C1917]/5 bg-white px-4 py-2 font-inter text-sm font-medium text-[#1C1917] shadow-md sm:-left-2"
+              aria-hidden="true"
+            >
+              CEO Tech
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- H. FAQ -->
+    <section class="px-4 py-20 sm:px-6 sm:py-28">
+      <div class="mx-auto max-w-3xl">
+        <h2 class={`mb-10 ${sectionTitleClasses}`}>
+          Preguntas<i> frecuentes</i><i class="text-[#78866B]"> del caos.</i>
+        </h2>
+
+        <div class={`divide-y divide-[#1C1917]/10 px-6 sm:px-8 ${cardClasses}`}>
+          {
+            faqs.map((faq) => (
+              <details class="group border-b border-[#1C1917]/10">
+                <summary class="flex cursor-pointer items-center justify-between py-5 font-['Outfit'] text-lg font-semibold transition hover:text-[#78866B] sm:text-xl">
+                  {faq.question}
+                  <span
+                    class="ml-4 shrink-0 text-[#78866B] transition-transform group-open:rotate-45"
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </summary>
+                <p class="pb-5 font-['Inter'] text-base leading-relaxed text-[#1C1917]/70">{faq.answer}</p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- I. Cierre + Footer -->
+    <section class="px-4 py-24 sm:px-6 sm:py-32">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class={sectionTitleClasses}>
+          El caos no espera.<i> Tu software</i><i class="text-[#78866B]"> tampoco.</i>
+        </h2>
+
+        <div class={`mx-auto mt-12 max-w-xl p-6 sm:p-8 ${cardClasses}`}>
+          <form class="flex flex-col gap-3 sm:flex-row sm:gap-4" action="#" method="post">
+            <label for="email-footer" class="sr-only">Correo electrónico</label>
+            <input
+              id="email-footer"
+              type="email"
+              name="email"
+              placeholder="tu@restaurante.com"
+              required
+              class="flex-1 rounded-lg border border-[#78866B] bg-transparent px-4 py-3 font-['Inter'] text-[#1C1917] placeholder:text-[#1C1917]/40 focus:outline-none focus:ring-2 focus:ring-[#78866B]"
+            />
+            <button
+              type="submit"
+              class="rounded-lg bg-[#78866B] px-6 py-3 font-['Outfit'] font-semibold text-[#F5F5F4] transition hover:bg-[#6a7760] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78866B]"
+            >
+              Empezar ahora
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="border-t border-[#1C1917]/10 px-4 py-8 sm:px-6">
+      <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 sm:flex-row">
+        <p class="font-['Inter'] text-sm text-[#1C1917]/50">© 2026 soyshua.dev</p>
+        <nav aria-label="Enlaces externos" class="flex flex-wrap justify-center gap-6">
+          {
+            footerLinks.map((link) => (
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-['Inter'] text-sm text-[#1C1917]/60 transition hover:text-[#78866B]"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+    </footer>
+  </main>
+</Layout>
