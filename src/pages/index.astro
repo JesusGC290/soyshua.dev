@@ -320,7 +320,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
           </span>
 
           <h2 class={`mt-6 ${sectionTitleClasses}`}>
-            Descarga gratis<i> mis herramientas</i><i class="text-[#78866B]"> operativas.</i>
+            Descarga<i> gratis</i> mis herramientas<i class="text-[#78866B]"> operativas.</i>
           </h2>
 
           <ul class="mt-8 w-full space-y-3">
@@ -339,11 +339,11 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
             }
           </ul>
 
-          <form id="lead-form" class="mt-8 w-full space-y-4" action="#" method="post" novalidate>
+          <form id="lead-form" class="mt-8 w-full space-y-4" novalidate>
             <div class="flex flex-col gap-3 sm:flex-row sm:gap-3">
-              <label for="name-lead" class="sr-only">Nombre</label>
+              <label for="lead-name" class="sr-only">Nombre</label>
               <input
-                id="name-lead"
+                id="lead-name"
                 type="text"
                 name="name"
                 placeholder="Tu nombre"
@@ -351,9 +351,9 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
                 autocomplete="name"
                 class="min-w-0 flex-1 rounded-2xl border border-[#1C1917]/10 bg-[#F5F5F4] px-4 py-3 font-inter text-[#1C1917] placeholder:text-[#1C1917]/40 focus:border-[#78866B] focus:outline-none focus:ring-2 focus:ring-[#78866B]"
               />
-              <label for="email-lead" class="sr-only">Correo electrónico</label>
+              <label for="lead-email" class="sr-only">Correo electrónico</label>
               <input
-                id="email-lead"
+                id="lead-email"
                 type="email"
                 name="email"
                 placeholder="tu@email.com"
@@ -363,90 +363,27 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
               />
             </div>
             <button
+              id="lead-submit"
               type="submit"
-              class="w-full rounded-2xl bg-[#78866B] px-6 py-3.5 font-['Outfit'] text-base font-bold text-[#F5F5F4] transition hover:bg-[#6a7760] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78866B] disabled:cursor-not-allowed disabled:opacity-70"
+              class="w-full rounded-2xl bg-[#78866B] px-6 py-3.5 font-['Outfit'] text-base font-bold text-[#F5F5F4] transition hover:bg-[#6a7760] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#78866B]"
             >
               Recibir las herramientas gratis
             </button>
           </form>
 
+          <div
+            id="success-message"
+            class="hidden mt-4 w-full rounded-2xl border border-[#78866B]/30 bg-[#78866B]/10 p-6 font-inter text-[#1C1917]"
+            role="status"
+            aria-live="polite"
+          >
+            ¡Listo! Revisa tu bandeja de entrada. Te hemos enviado el acceso a las herramientas.
+          </div>
+
           <p class="mt-4 font-inter text-sm text-[#1C1917]/50">Cero spam. Acceso inmediato a los PDF.</p>
-          <p id="lead-form-status" class="mt-2 hidden font-inter text-sm" role="status" aria-live="polite" />
         </div>
       </div>
     </section>
-
-    <script>
-      const leadForm = document.getElementById("lead-form");
-      const leadStatus = document.getElementById("lead-form-status");
-
-      type LeadStatusTone = "success" | "error" | "neutral";
-
-      leadForm?.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const form = event.currentTarget;
-        if (!(form instanceof HTMLFormElement)) return;
-
-        const submitButton = form.querySelector('button[type="submit"]');
-        if (!(submitButton instanceof HTMLButtonElement)) return;
-
-        const nameInput = form.querySelector("#name-lead");
-        const emailInput = form.querySelector("#email-lead");
-        if (!(nameInput instanceof HTMLInputElement) || !(emailInput instanceof HTMLInputElement)) return;
-
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-
-        if (!name || !email) {
-          showLeadStatus("Completa tu nombre y correo para continuar.", "error");
-          return;
-        }
-
-        const endpoint = form.getAttribute("data-endpoint");
-        if (!endpoint) {
-          showLeadStatus("Listo. Revisa tu correo para acceder a los PDF.", "success");
-          return;
-        }
-
-        submitButton.disabled = true;
-        showLeadStatus("Enviando…", "neutral");
-
-        try {
-          const response = await fetch(endpoint, {
-            method: form.method || "POST",
-            headers: { Accept: "application/json", "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email }),
-          });
-
-          if (!response.ok) {
-            throw new Error("submit_failed");
-          }
-
-          form.reset();
-          showLeadStatus("Listo. Revisa tu correo para acceder a los PDF.", "success");
-        } catch {
-          showLeadStatus("No pudimos enviar el formulario. Intenta de nuevo en un momento.", "error");
-        } finally {
-          submitButton.disabled = false;
-        }
-      });
-
-      function showLeadStatus(message: string, tone: LeadStatusTone) {
-        if (!leadStatus) return;
-
-        leadStatus.textContent = message;
-        leadStatus.classList.remove("hidden", "text-[#78866B]", "text-red-600", "text-[#1C1917]/60");
-
-        if (tone === "success") {
-          leadStatus.classList.add("text-[#78866B]");
-        } else if (tone === "error") {
-          leadStatus.classList.add("text-red-600");
-        } else {
-          leadStatus.classList.add("text-[#1C1917]/60");
-        }
-      }
-    </script>
 
     <!-- E. Métricas -->
     <section class="px-4 py-12 sm:px-6 sm:py-16" aria-label="Métricas">
@@ -468,7 +405,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
     <section class="px-4 py-20 sm:px-6 sm:py-28">
       <div class="mx-auto max-w-6xl">
         <h2 class={`mb-12 ${sectionTitleClasses}`}>
-          Termina con<i> la talacha</i><i class="text-[#78866B]"> operativa.</i>
+          Termina con la<i> talacha</i> de lo<i class="text-[#78866B]"> operativo.</i>
         </h2>
 
         <div class="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-12">
@@ -558,7 +495,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
           </div>
 
           <h2 id="sobre-mi-heading" class={sectionTitleClasses}>
-            No soy chef,<i> soy</i><i class="text-[#78866B]"> Developer.</i>
+            No soy <i>chef</i>, soy<i class="text-[#78866B]"> Developer.</i>
           </h2>
 
           <div class="mt-8 space-y-4 font-inter text-base leading-relaxed text-[#1C1917]/80 sm:text-lg">
@@ -637,7 +574,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
     <section class="px-4 py-20 sm:px-6 sm:py-28">
       <div class="mx-auto max-w-3xl">
         <h2 class={`mb-10 ${sectionTitleClasses}`}>
-          Preguntas<i> frecuentes</i><i class="text-[#78866B]"> del caos.</i>
+          Preguntas<i> frecuentes</i> del<i class="text-[#78866B]"> caos.</i>
         </h2>
 
         <div class={`divide-y divide-[#1C1917]/10 px-6 sm:px-8 ${cardClasses}`}>
@@ -665,7 +602,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
     <section class="px-4 py-24 sm:px-6 sm:py-32">
       <div class="mx-auto max-w-3xl text-center">
         <h2 class={sectionTitleClasses}>
-          El caos no espera.<i> Tu software</i><i class="text-[#78866B]"> tampoco.</i>
+          El caos no espera. Tu<i> software</i> tampoco<i class="text-[#78866B]"> espera.</i>
         </h2>
 
         <div class={`mx-auto mt-12 max-w-xl p-6 sm:p-8 ${cardClasses}`}>
@@ -710,4 +647,62 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
       </div>
     </footer>
   </main>
+
+  <script>
+    // Reemplaza la URL por tu webhook de Make.com
+    const WEBHOOK_URL = "https://hook.us2.make.com/57p3buwbr7de8h1u0ek47v3aknfxr36f";
+
+    const SUBMIT_LABEL_DEFAULT = "Recibir las herramientas gratis";
+
+    const leadForm = document.getElementById("lead-form");
+    const leadName = document.getElementById("lead-name");
+    const leadEmail = document.getElementById("lead-email");
+    const leadSubmit = document.getElementById("lead-submit");
+    const successMessage = document.getElementById("success-message");
+
+    function resetSubmitButton() {
+      if (!(leadSubmit instanceof HTMLButtonElement)) return;
+      leadSubmit.textContent = SUBMIT_LABEL_DEFAULT;
+      leadSubmit.classList.remove("opacity-70", "cursor-not-allowed");
+      leadSubmit.disabled = false;
+    }
+
+    leadForm?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      if (
+        !(leadName instanceof HTMLInputElement) ||
+        !(leadEmail instanceof HTMLInputElement) ||
+        !(leadSubmit instanceof HTMLButtonElement)
+      ) {
+        return;
+      }
+
+      const valorNombre = leadName.value.trim();
+      const valorEmail = leadEmail.value.trim();
+
+      leadSubmit.textContent = "Enviando...";
+      leadSubmit.classList.add("opacity-70", "cursor-not-allowed");
+      leadSubmit.disabled = true;
+
+      try {
+        const response = await fetch(WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre: valorNombre, email: valorEmail }),
+        });
+
+        if (response.ok) {
+          leadForm?.classList.add("hidden");
+          successMessage?.classList.remove("hidden");
+        } else {
+          resetSubmitButton();
+          alert("Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.");
+        }
+      } catch {
+        resetSubmitButton();
+        alert("Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.");
+      }
+    });
+  </script>
 </Layout>
