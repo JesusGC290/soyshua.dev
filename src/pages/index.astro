@@ -340,6 +340,14 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
           </ul>
 
           <form id="lead-form" class="mt-8 w-full space-y-4" novalidate>
+            <input
+              type="text"
+              name="bot_field"
+              id="lead-bot-field"
+              tabindex="-1"
+              autocomplete="off"
+              class="absolute opacity-0 -z-10 -left-[9999px]"
+            />
             <div class="flex flex-col gap-3 sm:flex-row sm:gap-3">
               <label for="lead-name" class="sr-only">Nombre</label>
               <input
@@ -657,6 +665,7 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
     const leadForm = document.getElementById("lead-form");
     const leadName = document.getElementById("lead-name");
     const leadEmail = document.getElementById("lead-email");
+    const leadBotField = document.getElementById("lead-bot-field");
     const leadSubmit = document.getElementById("lead-submit");
     const successMessage = document.getElementById("success-message");
 
@@ -680,6 +689,12 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
 
       const valorNombre = leadName.value.trim();
       const valorEmail = leadEmail.value.trim();
+
+      if (leadBotField instanceof HTMLInputElement && leadBotField.value.trim() !== "") {
+        leadForm?.classList.add("hidden");
+        successMessage?.classList.remove("hidden");
+        return;
+      }
 
       leadSubmit.textContent = "Enviando...";
       leadSubmit.classList.add("opacity-70", "cursor-not-allowed");
