@@ -342,10 +342,10 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
           <form id="lead-form" class="mt-8 w-full space-y-4" novalidate>
             <input
               type="text"
-              name="bot_field"
+              name="a_password_confirm_hash"
               id="lead-bot-field"
               tabindex="-1"
-              autocomplete="off"
+              autocomplete="new-password"
               class="absolute opacity-0 -z-10 -left-[9999px]"
             />
             <div class="flex flex-col gap-3 sm:flex-row sm:gap-3">
@@ -701,10 +701,13 @@ const sectionTitleClasses = "font-outfit text-3xl font-bold tracking-tight text-
       leadSubmit.disabled = true;
 
       try {
+        const formData = new FormData();
+        formData.append("nombre", valorNombre);
+        formData.append("email", valorEmail);
+
         const response = await fetch(WEBHOOK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ nombre: valorNombre, email: valorEmail }),
+          body: formData,
         });
 
         if (response.ok) {
