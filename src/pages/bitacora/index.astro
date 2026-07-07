@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Sello from '../../components/Sello.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import ProximaCard from '../../components/ProximaCard.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { numeroDePieza, proximamente } from '../../data/bitacora';
+
+const entradas = (await getCollection('bitacora', (entrada) => !entrada.data.draft)).sort(
+  (a, b) =>
+    b.data.fecha.getTime() - a.data.fecha.getTime() ||
+    (numeroDePieza[b.id] ?? '').localeCompare(numeroDePieza[a.id] ?? ''),
+);
+---
+
+<Layout title="Bitácora — Shua | soyshua.dev">
+  <section class="px-4 py-14 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-3xl">
+      <Sello>Bitácora</Sello>
+      <h1
+        class="mt-4 font-mono text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight text-ink"
+      >
+        El cuaderno abierto
+      </h1>
+      <p class="mt-4 max-w-[65ch] text-lg leading-relaxed text-ink-soft">
+        Notas de lo que voy aprendiendo mientras construyo. Cada entrada aplica una idea a una
+        decisión real.
+      </p>
+
+      <div class="mt-10 space-y-4">
+        {
+          entradas.map((entrada) => (
+            <EntryCard
+              slug={entrada.id}
+              titulo={entrada.data.title}
+              resumen={entrada.data.resumen}
+              fecha={entrada.data.fecha}
+              pilar={entrada.data.pilar}
+              numero={numeroDePieza[entrada.id]}
+              nivelTitulo="h2"
+            />
+          ))
+        }
+      </div>
+
+      <h2
+        class="mt-14 font-mono text-[clamp(1.35rem,3vw,1.75rem)] font-bold tracking-tight text-ink"
+      >
+        Próximamente
+      </h2>
+      <div class="mt-6 space-y-4">
+        {proximamente.map((pieza) => <ProximaCard pieza={pieza} />)}
+      </div>
+
+      <div class="mt-14">
+        <LeadForm formId="suscripcion-bitacora" />
+      </div>
+    </div>
+  </section>
+</Layout>

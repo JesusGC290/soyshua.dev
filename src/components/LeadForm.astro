@@ -1,0 +1,146 @@
+---
+interface Props {
+  formId?: string;
+  titulo?: string;
+  texto?: string;
+}
+
+const {
+  formId = 'suscripcion',
+  titulo = 'Suscríbete a la bitácora',
+  texto = 'Te aviso cuando publico algo nuevo y te doy acceso a las herramientas. Sin spam, sin relleno.',
+} = Astro.props;
+---
+
+<div class="ficha p-6 sm:p-8" data-lead-form-root>
+  <h2 class="font-mono text-xl font-bold tracking-tight text-ink sm:text-2xl">{titulo}</h2>
+  <p class="mt-2 max-w-[55ch] leading-relaxed text-ink-soft">{texto}</p>
+
+  <form class="mt-6 space-y-4" data-lead-form>
+    <input
+      type="text"
+      name="a_password_confirm_hash"
+      tabindex="-1"
+      autocomplete="new-password"
+      aria-hidden="true"
+      class="absolute -left-[9999px] -z-10 opacity-0"
+    />
+    <div class="flex flex-col gap-3 sm:flex-row">
+      <div class="min-w-0 flex-1">
+        <label
+          for={`${formId}-nombre`}
+          class="mb-1 block font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft"
+        >
+          Nombre
+        </label>
+        <input
+          id={`${formId}-nombre`}
+          type="text"
+          name="nombre"
+          required
+          autocomplete="name"
+          placeholder="Tu nombre"
+          class="w-full rounded-[2px] border border-rule bg-paper px-3 py-2.5 text-ink placeholder:text-ink-soft/60"
+        />
+      </div>
+      <div class="min-w-0 flex-1">
+        <label
+          for={`${formId}-email`}
+          class="mb-1 block font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft"
+        >
+          Correo
+        </label>
+        <input
+          id={`${formId}-email`}
+          type="email"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="tu@email.com"
+          class="w-full rounded-[2px] border border-rule bg-paper px-3 py-2.5 text-ink placeholder:text-ink-soft/60"
+        />
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="w-full rounded-[2px] bg-brass px-6 py-3 font-mono text-sm font-bold text-card transition-colors hover:bg-ink sm:w-auto"
+    >
+      Quiero recibir la bitácora
+    </button>
+  </form>
+
+  <p
+    class="mt-6 hidden border border-moss bg-paper p-4 leading-relaxed text-ink"
+    data-lead-success
+    role="status"
+    aria-live="polite"
+  >
+    Listo. Revisa tu correo — te escribo cuando haya algo que valga la pena.
+  </p>
+</div>
+
+<script>
+  const WEBHOOK_URL = 'https://hook.us2.make.com/57p3buwbr7de8h1u0ek47v3aknfxr36f';
+
+  document.querySelectorAll('[data-lead-form-root]').forEach((root) => {
+    const form = root.querySelector('[data-lead-form]');
+    const mensajeExito = root.querySelector('[data-lead-success]');
+    if (!(form instanceof HTMLFormElement) || !(mensajeExito instanceof HTMLElement)) return;
+
+    const campoNombre = form.querySelector('input[name="nombre"]');
+    const campoEmail = form.querySelector('input[name="email"]');
+    const campoBot = form.querySelector('input[name="a_password_confirm_hash"]');
+    const boton = form.querySelector('button[type="submit"]');
+    if (
+      !(campoNombre instanceof HTMLInputElement) ||
+      !(campoEmail instanceof HTMLInputElement) ||
+      !(boton instanceof HTMLButtonElement)
+    ) {
+      return;
+    }
+
+    const etiquetaOriginal = boton.textContent;
+
+    const mostrarExito = () => {
+      form.classList.add('hidden');
+      mensajeExito.classList.remove('hidden');
+    };
+
+    const restaurarBoton = () => {
+      boton.textContent = etiquetaOriginal;
+      boton.classList.remove('opacity-70', 'cursor-not-allowed');
+      boton.disabled = false;
+    };
+
+    form.addEventListener('submit', async (evento) => {
+      evento.preventDefault();
+
+      if (campoBot instanceof HTMLInputElement && campoBot.value.trim() !== '') {
+        mostrarExito();
+        return;
+      }
+
+      boton.textContent = 'Enviando…';
+      boton.classList.add('opacity-70', 'cursor-not-allowed');
+      boton.disabled = true;
+
+      try {
+        const datos = new FormData();
+        datos.append('nombre', campoNombre.value.trim());
+        datos.append('email', campoEmail.value.trim());
+
+        const respuesta = await fetch(WEBHOOK_URL, { method: 'POST', body: datos });
+
+        if (respuesta.ok) {
+          mostrarExito();
+        } else {
+          restaurarBoton();
+          alert('Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.');
+        }
+      } catch {
+        restaurarBoton();
+        alert('Hubo un error al procesar tu solicitud. Por favor, intenta de nuevo.');
+      }
+    });
+  });
+</script>

@@ -1,28 +1,19 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        base: '#1C1917',
-        secondary: '#F5F5F4',
-        accent: '#78866B',
+        paper: '#EBE8DB',
+        card: '#F5F2E7',
+        ink: '#23281F',
+        'ink-soft': '#5B5A4C',
+        rule: '#B7B29B',
+        brass: '#8F5A26',
+        moss: '#3E5940',
       },
       fontFamily: {
-        outfit: [
-          'Outfit',
-          'ui-sans-serif',
-          'system-ui',
-          'sans-serif',
-        ],
-        inter: [
-          'Inter',
-          'ui-sans-serif',
-          'system-ui',
-          'sans-serif',
-          'Apple Color Emoji',
-          'Segoe UI Emoji',
-        ],
+        mono: ['"IBM Plex Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        sans: ['"IBM Plex Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
     },
   },

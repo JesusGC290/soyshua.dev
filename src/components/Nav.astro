@@ -1,0 +1,44 @@
+---
+const enlaces = [
+  { href: '/', label: 'Inicio' },
+  { href: '/bitacora', label: 'Bitácora' },
+  { href: '/recursos', label: 'Recursos' },
+  { href: '/proyectos', label: 'Proyectos' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+];
+
+const rutaActual = Astro.url.pathname.replace(/\/$/, '') || '/';
+const esActiva = (href: string) =>
+  href === '/' ? rutaActual === '/' : rutaActual === href || rutaActual.startsWith(`${href}/`);
+---
+
+<header class="border-b border-rule bg-paper">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center gap-2 px-4 py-4 sm:flex-row sm:items-baseline sm:justify-between sm:px-6 sm:py-5"
+  >
+    <a href="/" class="font-mono text-base font-bold tracking-tight text-ink transition-colors hover:text-brass">
+      soyshua.dev
+    </a>
+    <nav aria-label="Navegación principal">
+      <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+        {
+          enlaces.map((enlace) => (
+            <li>
+              <a
+                href={enlace.href}
+                aria-current={esActiva(enlace.href) ? 'page' : undefined}
+                class={`text-sm transition-colors hover:text-brass ${
+                  esActiva(enlace.href)
+                    ? 'font-medium text-brass underline decoration-brass underline-offset-4'
+                    : 'text-ink-soft'
+                }`}
+              >
+                {enlace.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</header>

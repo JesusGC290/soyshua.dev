@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+import Layout from '../layouts/Layout.astro';
+import Sello from '../components/Sello.astro';
+import fotoPerfil from '../img/soyshua.jpg';
+
+const parrafos = [
+  'Durante años solo me importaba el código. Después me metí a la operación real de los negocios —precios, ventas, clientes, caos administrativo— y entendí que el mejor software del mundo no sirve si nadie sabe venderlo ni sostenerlo.',
+  'Hoy soy cofundador y CMO en Aztecknology, el estudio donde construimos productos propios. Mi foco principal es Nei Digital, nuestra suite para restaurantes: no solo la parte técnica, sino aprender a venderla —reajustar precios, mejorar la oferta, comunicar mejor.',
+  'Para eso estudio a quienes ya lo resolvieron: Hormozi para oferta, Brunson para funnels, Dan Kennedy para copy, Rohn y Robbins para la cabeza. No como gurús, sino como herramientas que pruebo en decisiones reales y documento aquí.',
+  'Este sitio es mi bitácora de taller. No vengo a venderte nada: vengo a compartir lo que voy aprendiendo mientras construyo. Si te sirve, tómalo.',
+];
+
+const redes = [
+  { label: 'Instagram', href: 'https://instagram.com/soyshua.dev' },
+  { label: 'TikTok', href: 'https://tiktok.com/@soyshua.dev' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/soyshua' },
+];
+---
+
+<Layout title="Sobre mí — Shua | soyshua.dev">
+  <section class="px-4 py-14 sm:px-6 sm:py-20">
+    <div class="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1fr_320px] md:gap-14">
+      <div>
+        <Sello>Sobre mí</Sello>
+        <h1
+          class="mt-4 font-mono text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight text-ink [text-wrap:balance]"
+        >
+          No empecé en marketing. Empecé escribiendo código.
+        </h1>
+        <div class="mt-6 max-w-[65ch] space-y-4 leading-relaxed text-ink">
+          {parrafos.map((parrafo) => <p>{parrafo}</p>)}
+        </div>
+        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+          {
+            redes.map((red) => (
+              <li>
+                <a
+                  href={red.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+                >
+                  {red.label} →
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="md:pt-10">
+        <figure class="ficha mx-auto max-w-xs p-3">
+          <Image
+            src={fotoPerfil}
+            alt="Shua, cofundador y CMO en Aztecknology"
+            width={320}
+            height={400}
+            widths={[320, 640]}
+            sizes="(max-width: 768px) 320px, 320px"
+            class="aspect-[4/5] w-full border border-rule object-cover"
+            loading="eager"
+          />
+          <figcaption class="pb-1 pt-3">
+            <Sello variante="tenue">Shua · Aztecknology</Sello>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+</Layout>

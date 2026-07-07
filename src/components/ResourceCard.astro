@@ -1,0 +1,31 @@
+---
+import Sello from './Sello.astro';
+import type { Recurso } from '../data/recursos';
+
+interface Props {
+  recurso: Recurso;
+  nivelTitulo?: 'h2' | 'h3';
+}
+
+const { recurso, nivelTitulo: Titulo = 'h3' } = Astro.props;
+---
+
+<article class="ficha group relative p-6 transition-colors hover:border-brass sm:p-7">
+  <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1.5">
+    <Sello>{recurso.numero} · {recurso.pilar}</Sello>
+    <Sello variante="contorno">{recurso.tipo}</Sello>
+  </div>
+  <Titulo class="mt-3 font-mono text-lg font-bold leading-snug tracking-tight text-ink sm:text-xl">
+    <a
+      href={recurso.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-brass"
+    >
+      {recurso.titulo}
+    </a>
+  </Titulo>
+  <p class="mt-2 text-[0.9375rem] leading-relaxed text-ink-soft">{recurso.descripcion}</p>
+  {recurso.nota && <p class="mt-3 font-mono text-xs leading-relaxed text-ink-soft">{recurso.nota}</p>}
+  <p class="mt-4 font-mono text-sm font-medium text-brass">Descargar el PDF →</p>
+</article>
