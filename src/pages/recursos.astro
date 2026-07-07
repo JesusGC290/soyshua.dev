@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sello from '../components/Sello.astro';
+import ResourceCard from '../components/ResourceCard.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { recursos } from '../data/recursos';
+---
+
+<Layout title="Recursos — Shua | soyshua.dev">
+  <section class="px-4 py-14 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-5xl">
+      <Sello>Recursos</Sello>
+      <h1
+        class="mt-4 max-w-3xl font-mono text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight text-ink [text-wrap:balance]"
+      >
+        Herramientas y ebooks que hago para mí y comparto
+      </h1>
+      <p class="mt-4 max-w-[65ch] text-lg leading-relaxed text-ink-soft">
+        Cosas que construyo para resolver problemas reales de negocio. Gratis. La biblioteca crece
+        con el tiempo.
+      </p>
+      <div class="mt-10 grid max-w-2xl gap-4">
+        {recursos.map((recurso) => <ResourceCard recurso={recurso} nivelTitulo="h2" />)}
+      </div>
+      <div class="mt-14 max-w-2xl">
+        <LeadForm formId="suscripcion-recursos" />
+      </div>
+    </div>
+  </section>
+</Layout>

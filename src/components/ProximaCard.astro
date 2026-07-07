@@ -1,0 +1,23 @@
+---
+import Sello from './Sello.astro';
+import { nombreDePilar } from '../data/pilares';
+import type { PiezaProxima } from '../data/bitacora';
+
+interface Props {
+  pieza: PiezaProxima;
+  nivelTitulo?: 'h3' | 'h4';
+}
+
+const { pieza, nivelTitulo: Titulo = 'h3' } = Astro.props;
+---
+
+<article class="ficha-tenue p-5 sm:p-6">
+  <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+    <Sello variante="tenue">{pieza.numero} · {nombreDePilar(pieza.pilar)}</Sello>
+    <Sello variante="contorno">Próximamente</Sello>
+  </div>
+  <Titulo class="mt-2.5 font-mono text-base font-bold leading-snug tracking-tight text-ink">
+    {pieza.titulo}
+  </Titulo>
+  <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{pieza.descripcion}</p>
+</article>

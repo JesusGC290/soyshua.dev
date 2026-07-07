@@ -1,0 +1,34 @@
+---
+const enlaces = [
+  { label: 'Aztecknology', href: 'https://aztecknology.com' },
+  { label: 'Instagram', href: 'https://instagram.com/soyshua.dev' },
+  { label: 'TikTok', href: 'https://tiktok.com/@soyshua.dev' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/soyshua' },
+];
+---
+
+<footer class="mt-16 border-t border-rule">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-4 py-8 sm:flex-row sm:px-6"
+  >
+    <p class="font-mono text-xs text-ink-soft">© 2026 soyshua.dev</p>
+    <nav aria-label="Enlaces externos">
+      <ul class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1">
+        {
+          enlaces.map((enlace) => (
+            <li>
+              <a
+                href={enlace.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-ink-soft transition-colors hover:text-brass"
+              >
+                {enlace.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</footer>

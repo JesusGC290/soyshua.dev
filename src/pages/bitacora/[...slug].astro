@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Sello from '../../components/Sello.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { nombreDePilar } from '../../data/pilares';
+import { numeroDePieza } from '../../data/bitacora';
+import { formatearFecha } from '../../lib/fecha';
+
+export async function getStaticPaths() {
+  const entradas = await getCollection('bitacora', (entrada) => !entrada.data.draft);
+  return entradas.map((entrada) => ({
+    params: { slug: entrada.id },
+    props: { entrada },
+  }));
+}
+
+const { entrada } = Astro.props;
+const { Content } = await render(entrada);
+const numero = numeroDePieza[entrada.id];
+---
+
+<Layout title={`${entrada.data.title} — Bitácora | soyshua.dev`} description={entrada.data.resumen}>
+  <article class="px-4 py-14 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-3xl">
+      <header>
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1.5">
+          <Sello>{numero ? `${numero} · ` : ''}{nombreDePilar(entrada.data.pilar)}</Sello>
+          <Sello variante="tenue">{formatearFecha(entrada.data.fecha)}</Sello>
+          {entrada.data.proyecto && <Sello variante="contorno">Proyecto: {entrada.data.proyecto}</Sello>}
+        </div>
+        <h1
+          class="mt-4 font-mono text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight text-ink [text-wrap:balance]"
+        >
+          {entrada.data.title}
+        </h1>
+      </header>
+
+      <div class="prosa mt-8">
+        <Content />
+      </div>
+
+      <div class="mt-14 max-w-2xl">
+        <LeadForm formId="suscripcion-entrada" />
+      </div>
+
+      <p class="mt-10">
+        <a
+          href="/bitacora"
+          class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+        >
+          ← Volver a la bitácora
+        </a>
+      </p>
+    </div>
+  </article>
+</Layout>

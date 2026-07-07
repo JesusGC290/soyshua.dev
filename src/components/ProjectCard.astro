@@ -1,0 +1,28 @@
+---
+import Sello from './Sello.astro';
+import type { Proyecto } from '../data/proyectos';
+
+interface Props {
+  proyecto: Proyecto;
+}
+
+const { proyecto } = Astro.props;
+---
+
+<article class="ficha p-6 transition-colors hover:border-brass sm:p-7">
+  <Sello variante={proyecto.destacado ? 'relleno' : 'brass'}>{proyecto.sello}</Sello>
+  <h2 class="mt-3 font-mono text-lg font-bold leading-snug tracking-tight text-ink sm:text-xl">
+    {proyecto.nombre}
+  </h2>
+  <p class="mt-2 text-[0.9375rem] leading-relaxed text-ink-soft">{proyecto.descripcion}</p>
+  <p class="mt-4">
+    <a
+      href={proyecto.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+    >
+      {proyecto.urlLabel}
+    </a>
+  </p>
+</article>

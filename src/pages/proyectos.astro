@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Sello from '../components/Sello.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { proyectos } from '../data/proyectos';
+---
+
+<Layout title="Proyectos — Shua | soyshua.dev">
+  <section class="px-4 py-14 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-5xl">
+      <Sello>Proyectos</Sello>
+      <h1
+        class="mt-4 font-mono text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight text-ink"
+      >
+        En qué estoy trabajando
+      </h1>
+      <p class="mt-4 max-w-[65ch] text-lg leading-relaxed text-ink-soft">
+        Lo que construyo con el equipo de Aztecknology. Aquí no hay botones de compra —solo lo que
+        es y en qué punto está.
+      </p>
+      <div class="mt-10 grid gap-4 sm:grid-cols-2">
+        {proyectos.map((proyecto) => <ProjectCard proyecto={proyecto} />)}
+      </div>
+    </div>
+  </section>
+</Layout>
