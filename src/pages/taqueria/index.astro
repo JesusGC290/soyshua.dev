@@ -5,6 +5,7 @@ import Sello from '../../components/Sello.astro';
 import CapituloCard from '../../components/CapituloCard.astro';
 import BloqueNumeros from '../../components/BloqueNumeros.astro';
 import LeadForm from '../../components/LeadForm.astro';
+import SeguirCTA from '../../components/SeguirCTA.astro';
 import { capitulos } from '../../data/serie';
 import { pesos, totalFijo, ventaNecesariaDia, ventaNecesariaMes } from '../../data/taqueria';
 
@@ -103,7 +104,8 @@ const descripcion = `Abrí mi taquería y la cerré en 3 días. Aquí está el c
   <!-- Suscripción -->
   <section class="px-4 py-12 sm:px-6 sm:py-16">
     <div class="mx-auto max-w-5xl">
-      <div class="max-w-2xl">
+      <div class="grid max-w-4xl gap-4 sm:grid-cols-2">
+        <SeguirCTA nivelTitulo="h2" />
         <LeadForm
           formId="suscripcion-taqueria"
           titulo="Te aviso cuando salga el siguiente episodio"

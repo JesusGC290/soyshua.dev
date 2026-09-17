@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import Sello from '../../components/Sello.astro';
 import BloqueNumeros from '../../components/BloqueNumeros.astro';
 import LeadForm from '../../components/LeadForm.astro';
+import SeguirCTA from '../../components/SeguirCTA.astro';
 import { capitulos, nombreDePilarSerie, selloEpisodio } from '../../data/serie';
 import { formatearFecha } from '../../lib/fecha';
 
@@ -90,6 +91,10 @@ const siguienteHref = siguientePublicado ? `/taqueria/${siguientePublicado.id}` 
       }
 
       <div class="mt-14 max-w-2xl">
+        <SeguirCTA />
+      </div>
+
+      <div class="mt-4 max-w-2xl">
         <LeadForm formId="suscripcion-serie" />
       </div>
 

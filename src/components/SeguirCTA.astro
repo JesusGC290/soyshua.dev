@@ -1,0 +1,38 @@
+---
+import Sello from './Sello.astro';
+import { redes, redPrincipal } from '../data/redes';
+
+interface Props {
+  texto?: string;
+  nivelTitulo?: 'h2' | 'h3';
+}
+
+const {
+  texto = 'Cada episodio sale primero en video. Si quieres verlos conforme los grabo, sígueme.',
+  nivelTitulo: Titulo = 'h2',
+} = Astro.props;
+---
+
+<div class="ficha p-6 sm:p-7">
+  <Sello>Sígueme</Sello>
+  <Titulo class="mt-2 font-mono text-lg font-bold tracking-tight text-ink sm:text-xl">
+    {redPrincipal.handle}
+  </Titulo>
+  <p class="mt-2 max-w-[55ch] leading-relaxed text-ink-soft">{texto}</p>
+  <ul class="mt-5 flex flex-wrap gap-x-5 gap-y-2">
+    {
+      redes.map((red) => (
+        <li>
+          <a
+            href={red.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+          >
+            {red.label} →
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

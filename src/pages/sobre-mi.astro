@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Sello from '../components/Sello.astro';
 import fotoPerfil from '../img/soyshua.jpg';
+import { redes } from '../data/redes';
 
 const parrafos = [
   'Durante años solo me importaba el código. Después me metí a la operación real de los negocios —precios, ventas, clientes, caos administrativo— y entendí que el mejor software del mundo no sirve si nadie sabe venderlo ni sostenerlo.',
@@ -11,11 +12,7 @@ const parrafos = [
   'Este sitio es mi bitácora de taller. No vengo a venderte nada: vengo a compartir lo que voy aprendiendo mientras construyo. Si te sirve, tómalo.',
 ];
 
-const redes = [
-  { label: 'Instagram', href: 'https://instagram.com/soyshua.dev' },
-  { label: 'TikTok', href: 'https://tiktok.com/@soyshua.dev' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/in/soyshua' },
-];
+
 ---
 
 <Layout title="Sobre mí — Shua | soyshua.dev">
