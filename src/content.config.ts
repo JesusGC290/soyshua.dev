@@ -13,4 +13,18 @@ const bitacora = defineCollection({
   }),
 });
 
-export const collections = { bitacora };
+const serie = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/serie' }),
+  schema: z.object({
+    title: z.string(),
+    episodio: z.number().int().nonnegative(),
+    pilar: z.enum(['numeros', 'trincheras', 'tech', 'mentalidad']),
+    fecha: z.coerce.date(),
+    resumen: z.string(),
+    /** Anexa el bloque de gastos fijos reales al final de la entrada. */
+    numeros: z.boolean().default(false),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { bitacora, serie };

@@ -1,0 +1,106 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Sello from '../../components/Sello.astro';
+import BloqueNumeros from '../../components/BloqueNumeros.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { capitulos, nombreDePilarSerie, selloEpisodio } from '../../data/serie';
+import { formatearFecha } from '../../lib/fecha';
+
+export async function getStaticPaths() {
+  const entradas = await getCollection('serie', (entrada) => !entrada.data.draft);
+  const porEpisodio = [...entradas].sort((a, b) => a.data.episodio - b.data.episodio);
+
+  return porEpisodio.map((entrada, indice) => ({
+    params: { slug: entrada.id },
+    props: { entrada, siguientePublicado: porEpisodio[indice + 1] ?? null },
+  }));
+}
+
+const { entrada, siguientePublicado } = Astro.props;
+const { Content } = await render(entrada);
+
+/** Si el siguiente episodio ya está escrito se enlaza; si no, se anuncia desde el índice. */
+const siguienteCapitulo = capitulos.find((c) => c.episodio === entrada.data.episodio + 1);
+const siguienteHref = siguientePublicado ? `/taqueria/${siguientePublicado.id}` : undefined;
+---
+
+<Layout
+  title={`${entrada.data.title} — ${selloEpisodio(entrada.data.episodio)} | soyshua.dev`}
+  description={entrada.data.resumen}
+>
+  <article class="px-4 py-14 sm:px-6 sm:py-20">
+    <div class="mx-auto max-w-3xl">
+      <header>
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1.5">
+          <Sello>{selloEpisodio(entrada.data.episodio)}</Sello>
+          <Sello variante="tenue">{nombreDePilarSerie(entrada.data.pilar)}</Sello>
+          <Sello variante="tenue">{formatearFecha(entrada.data.fecha)}</Sello>
+          <Sello variante="contorno">Los de Caché</Sello>
+        </div>
+        <h1
+          class="mt-4 font-mono text-[clamp(1.75rem,4.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight text-ink [text-wrap:balance]"
+        >
+          {entrada.data.title}
+        </h1>
+      </header>
+
+      <div class="prosa mt-8">
+        <Content />
+      </div>
+
+      {
+        entrada.data.numeros && (
+          <section class="mt-14">
+            <div class="mb-3 h-0.5 w-10 bg-brass" aria-hidden="true" />
+            <h2 class="font-mono text-[clamp(1.35rem,3vw,1.75rem)] font-bold tracking-tight text-ink">
+              Los números, completos
+            </h2>
+            <p class="mt-2 max-w-[65ch] leading-relaxed text-ink-soft">
+              Sin redondear. Cópialos, compáralos con los tuyos.
+            </p>
+            <div class="mt-6">
+              <BloqueNumeros nivelTitulo="h3" />
+            </div>
+          </section>
+        )
+      }
+
+      {
+        siguienteCapitulo && (
+          <nav class="mt-14 border-t border-rule pt-8" aria-label="Siguiente episodio">
+            <Sello variante="tenue">
+              Sigue · {selloEpisodio(siguienteCapitulo.episodio)}
+            </Sello>
+            <h2 class="mt-2 font-mono text-lg font-bold leading-snug tracking-tight text-ink">
+              {siguienteHref ? (
+                <a class="transition-colors hover:text-brass" href={siguienteHref}>
+                  {siguienteCapitulo.titulo} →
+                </a>
+              ) : (
+                siguienteCapitulo.titulo
+              )}
+            </h2>
+            <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">
+              {siguienteCapitulo.descripcion}
+              {!siguienteHref && ' Aún no sale — suscríbete abajo y te aviso.'}
+            </p>
+          </nav>
+        )
+      }
+
+      <div class="mt-14 max-w-2xl">
+        <LeadForm formId="suscripcion-serie" />
+      </div>
+
+      <p class="mt-10">
+        <a
+          href="/taqueria"
+          class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+        >
+          ← Ver la serie completa
+        </a>
+      </p>
+    </div>
+  </article>
+</Layout>

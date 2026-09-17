@@ -1,0 +1,46 @@
+---
+import Sello from './Sello.astro';
+import { nombreDePilarSerie, selloEpisodio, type Capitulo } from '../data/serie';
+
+interface Props {
+  capitulo: Capitulo;
+  /** Si el .md existe y está publicado, la tarjeta enlaza. Si no, queda atenuada. */
+  publicado: boolean;
+  nivelTitulo?: 'h2' | 'h3';
+}
+
+const { capitulo, publicado, nivelTitulo: Titulo = 'h3' } = Astro.props;
+const href = capitulo.slug ? `/taqueria/${capitulo.slug}` : undefined;
+---
+
+{
+  publicado && href ? (
+    <article class="ficha group relative p-5 transition-colors hover:border-brass sm:p-6">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <Sello>{selloEpisodio(capitulo.episodio)}</Sello>
+        <Sello variante="tenue">{nombreDePilarSerie(capitulo.pilar)}</Sello>
+      </div>
+      <Titulo class="mt-2.5 font-mono text-base font-bold leading-snug tracking-tight text-ink sm:text-lg">
+        <a
+          href={href}
+          class="transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-brass"
+        >
+          {capitulo.titulo}
+        </a>
+      </Titulo>
+      <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{capitulo.descripcion}</p>
+    </article>
+  ) : (
+    <article class="ficha-tenue p-5 sm:p-6">
+      <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <Sello variante="tenue">{selloEpisodio(capitulo.episodio)}</Sello>
+        <Sello variante="tenue">{nombreDePilarSerie(capitulo.pilar)}</Sello>
+        <Sello variante="contorno">En camino</Sello>
+      </div>
+      <Titulo class="mt-2.5 font-mono text-base font-bold leading-snug tracking-tight text-ink">
+        {capitulo.titulo}
+      </Titulo>
+      <p class="mt-1.5 text-sm leading-relaxed text-ink-soft">{capitulo.descripcion}</p>
+    </article>
+  )
+}

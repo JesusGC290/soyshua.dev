@@ -9,6 +9,7 @@ import LeadForm from '../components/LeadForm.astro';
 import { pilares } from '../data/pilares';
 import { recursos } from '../data/recursos';
 import { numeroDePieza, proximamente } from '../data/bitacora';
+import { pesos, totalFijo, ventaNecesariaDia } from '../data/taqueria';
 
 const entradas = (await getCollection('bitacora', (entrada) => !entrada.data.draft)).sort(
   (a, b) =>
@@ -34,6 +35,35 @@ const [recursoDestacado] = recursos;
         cómo aplico ideas de oferta, marketing, copywriting y crecimiento a decisiones reales.
         Precios de Nei Digital, sistemas con IA, y el oficio de vender sin traicionar el producto.
       </p>
+    </div>
+  </section>
+
+  <!-- La taquería: serie destacada -->
+  <section class="px-4 py-10 sm:px-6 sm:py-12">
+    <div class="mx-auto max-w-5xl">
+      <article class="ficha group relative p-6 transition-colors hover:border-brass sm:p-8">
+        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+          <Sello>Serie en curso · Los de Caché</Sello>
+          <Sello variante="tenue">13 episodios</Sello>
+        </div>
+        <h2
+          class="mt-3 font-mono text-[clamp(1.35rem,3.5vw,2rem)] font-bold leading-snug tracking-tight text-ink"
+        >
+          <a
+            href="/taqueria"
+            class="transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-brass"
+          >
+            Abrí mi taquería y la tuve que cerrar en 3 días
+          </a>
+        </h2>
+        <p class="mt-3 max-w-[65ch] leading-relaxed text-ink-soft">
+          Construyo el software que los negocios usan para no quebrar. Abrí el mío y duró tres
+          días. Estoy desarmando el caso completo, área por área, con mis números reales: {
+            pesos(totalFijo)
+          } de gastos fijos al mes y {pesos(ventaNecesariaDia)} diarios solo para no perder.
+        </p>
+        <p class="mt-5 font-mono text-sm font-medium text-brass">Ver el caso completo →</p>
+      </article>
     </div>
   </section>
 

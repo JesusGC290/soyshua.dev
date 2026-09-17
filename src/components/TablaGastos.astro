@@ -1,0 +1,50 @@
+---
+import { gastosFijos, totalFijo, pesos } from '../data/taqueria';
+
+interface Props {
+  /** Título de la ficha. */
+  titulo?: string;
+  nivelTitulo?: 'h2' | 'h3';
+}
+
+const { titulo = 'Gastos fijos al mes — Los de Caché', nivelTitulo: Titulo = 'h3' } = Astro.props;
+---
+
+<div class="ficha p-5 sm:p-7">
+  <Titulo class="font-mono text-base font-bold tracking-tight text-ink sm:text-lg">
+    {titulo}
+  </Titulo>
+  <p class="mt-1 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+    Los que pago aunque no venda nada
+  </p>
+
+  <dl class="mt-5">
+    {
+      gastosFijos.map((gasto) => (
+        <div class="flex items-baseline justify-between gap-4 border-b border-rule/60 py-2.5">
+          <dt class="min-w-0 text-[0.9375rem] text-ink">
+            {gasto.concepto}
+            {gasto.nota && (
+              <span class="ml-2 font-mono text-[0.6875rem] text-ink-soft">({gasto.nota})</span>
+            )}
+          </dt>
+          <dd class="shrink-0 font-mono text-[0.9375rem] font-bold tabular-nums text-ink">
+            {pesos(gasto.monto)}
+          </dd>
+        </div>
+      ))
+    }
+    <div class="mt-1 flex items-baseline justify-between gap-4 border-t-2 border-brass pt-3">
+      <dt class="font-mono text-sm font-bold uppercase tracking-[0.1em] text-brass">Total fijo</dt>
+      <dd
+        class="shrink-0 font-mono text-[clamp(1.5rem,5vw,2rem)] font-bold leading-none tabular-nums text-brass"
+      >
+        {pesos(totalFijo)}
+      </dd>
+    </div>
+  </dl>
+
+  <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+    Ni un peso de estos {pesos(totalFijo)} es comida. Es solo tener el negocio abierto.
+  </p>
+</div>

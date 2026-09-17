@@ -114,6 +114,34 @@ No hay ebooks pre-hechos: se trabajan desde cero, uno a la vez, siguiendo este o
 8. Redactar las piezas #4 y #5 del roadmap, a mano
 9. Actualizar la pieza #2 cuando terminen los 30 días de la campaña (dejó la apuesta abierta)
 
+## 12. Iniciativas siguientes (post-lanzamiento)
+
+Cada una se trabaja en su propia conversación, con su brief de handoff en [`docs/iniciativas/`](iniciativas/):
+
+- [Videos para redes + integración al sitio](iniciativas/videos.md) — serie de video corto sobre lo aprendido con Hormozi, surtido también al sitio.
+- [Herramientas interactivas con IA](iniciativas/wizard-interactivo.md) — convertir las prácticas (empezando por el costeo de Hormozi) en wizards sobre Cloudflare AI, sin fricción. De sitio de lectura a sitio de interacción.
+
+## 13. La taquería — sección propia (Los de Caché)
+
+Sección nueva, **aparte de la bitácora**, en `/taqueria`. La bitácora sigue siendo el build in public de software (Hormozi, Brunson, Kennedy); la taquería es el caso de estudio de un negocio físico real y tiene su propia taxonomía.
+
+**Serie:** "Cómo iniciar un negocio gastronómico y no perder tus ahorros en el intento" — 13 episodios (0 al 12), uno por área del negocio.
+
+**Pilares propios de la serie** (`src/data/serie.ts`): Números que sí importan · En las trincheras · Tech para tu negocio · Mentalidad de emprendedor.
+
+| Pieza | Archivo | Estado |
+|---|---|---|
+| Ep. 00 — Abrí mi taquería y la tuve que cerrar en 3 días | `src/content/serie/abri-mi-taqueria-y-la-cerre-en-3-dias.md` | Publicado |
+| Ep. 01 — Cuánto cuesta de verdad tener una taquería abierta | `src/content/serie/punto-de-equilibrio-gastos-fijos-reales.md` | Publicado |
+| Ep. 02 — Cuánto te cuesta de verdad cada platillo (costeo) | — | Siguiente |
+| Ep. 03 al 12 | — | Anunciados en el índice de `/taqueria` |
+
+**Los números son código, no texto.** Todos los datos reales viven en `src/data/taqueria.ts` y lo derivado se calcula (total fijo, comisión de tarjeta, punto de equilibrio mensual y diario, variante de nómina a 4 semanas). Si cambia un gasto, se cambia ahí y el sitio entero se actualiza solo — las entradas, la home y el bloque de pantalla nunca se pueden contradecir.
+
+**`/taqueria` está diseñada para grabarse.** El bloque "Mis números reales" usa cifras grandes en mono para que se lea en video vertical. El flujo es: el reel manda a `soyshua.dev/taqueria` → ahí está el caso completo y el índice → cada episodio captura suscriptor.
+
+**Para publicar el episodio siguiente:** escribir el `.md` en `src/content/serie/` con su `episodio:` y agregar el `slug` al capítulo correspondiente en `src/data/serie.ts`. La tarjeta pasa sola de "En camino" a enlazada.
+
 ## 11. Spec de implementación (para Fable 5)
 
 El plan ejecutable vive en [`docs/build/`](build/), autocontenido para que Fable 5 lo aplique en una sola pasada:

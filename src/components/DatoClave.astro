@@ -1,0 +1,26 @@
+---
+interface Props {
+  /** Etiqueta corta en sello, arriba de la cifra. */
+  etiqueta: string;
+  /** La cifra grande. Es lo que se lee en pantalla. */
+  cifra: string;
+  /** Una línea que explica qué es la cifra. */
+  nota: string;
+  /** Destaca el dato como el más importante del bloque. */
+  destacado?: boolean;
+}
+
+const { etiqueta, cifra, nota, destacado = false } = Astro.props;
+---
+
+<div class={`ficha p-5 sm:p-6 ${destacado ? 'border-brass' : ''}`}>
+  <p class="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">{etiqueta}</p>
+  <p
+    class={`mt-2 font-mono text-[clamp(1.75rem,6vw,2.5rem)] font-bold leading-none tracking-tight tabular-nums ${
+      destacado ? 'text-brass' : 'text-ink'
+    }`}
+  >
+    {cifra}
+  </p>
+  <p class="mt-2.5 text-sm leading-relaxed text-ink-soft">{nota}</p>
+</div>

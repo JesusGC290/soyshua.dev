@@ -1,0 +1,83 @@
+---
+import TablaGastos from './TablaGastos.astro';
+import DatoClave from './DatoClave.astro';
+import {
+  totalFijo,
+  totalFijoCuatroSemanas,
+  nominaMensual,
+  nominaSemanal,
+  nominaCuatroSemanas,
+  gastoMayor,
+  renta,
+  comisionTarjeta,
+  ventaNecesariaMes,
+  costoComisionMes,
+  ventaNecesariaDia,
+  diasDelMes,
+  pesos,
+  porcentaje,
+} from '../data/taqueria';
+
+interface Props {
+  nivelTitulo?: 'h2' | 'h3';
+  /** Muestra los caveats de honestidad. Se apagan solo si el texto ya los explica. */
+  caveats?: boolean;
+}
+
+const { nivelTitulo = 'h3', caveats = true } = Astro.props;
+---
+
+<div class="not-prose grid gap-4 sm:grid-cols-2">
+  <div class="sm:col-span-2">
+    <TablaGastos nivelTitulo={nivelTitulo} />
+  </div>
+
+  <DatoClave
+    etiqueta="El gasto más grande"
+    cifra={pesos(gastoMayor.monto)}
+    nota={`${gastoMayor.concepto}. Más que la renta (${pesos(renta.monto)}). Verla semanal —${pesos(nominaSemanal)}— es la trampa: al mes son ${pesos(nominaMensual)}.`}
+  />
+
+  <DatoClave
+    etiqueta={`Comisión de tarjeta · ${porcentaje(comisionTarjeta)}`}
+    cifra={pesos(costoComisionMes)}
+    nota={`De cada $100 que cobras con tarjeta te llegan $97.50. Para netear ${pesos(totalFijo)} hay que facturar ${pesos(ventaNecesariaMes)}.`}
+  />
+
+  <DatoClave
+    etiqueta="Punto de equilibrio al mes"
+    cifra={pesos(ventaNecesariaMes)}
+    nota="Ventas necesarias para no perder. Antes de pagar un solo insumo."
+  />
+
+  <DatoClave
+    etiqueta={`Punto de equilibrio al día · ÷ ${diasDelMes}`}
+    cifra={pesos(ventaNecesariaDia)}
+    nota="Lo que tengo que vender cada día solo para quedar en ceros. No para ganar."
+    destacado
+  />
+</div>
+
+{
+  caveats && (
+    <div class="not-prose mt-5 border-l-2 border-rule pl-4">
+      <p class="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+        Cómo leer estos números
+      </p>
+      <ul class="mt-2 space-y-1.5 text-sm leading-relaxed text-ink-soft">
+        <li>
+          La nómina está a 52 semanas ÷ 12 = 4.33 semanas al mes. Si la presupuestas a 4 semanas
+          exactas son {pesos(nominaCuatroSemanas)} y el total baja a {pesos(totalFijoCuatroSemanas)}.
+        </li>
+        <li>
+          El cálculo de comisión asume todo cobrado con tarjeta, que es hacia donde va todo. Si
+          cobras parte en efectivo, baja un poco.
+        </li>
+        <li>
+          Este es el punto de equilibrio <strong class="font-semibold text-ink">antes de insumos</strong>.
+          Es el piso, no el número final: sube cuando sumas lo que cuesta hacer cada platillo.
+        </li>
+      </ul>
+    </div>
+  )
+}
