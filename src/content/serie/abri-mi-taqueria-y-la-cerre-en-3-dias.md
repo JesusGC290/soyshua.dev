@@ -40,7 +40,7 @@ Eso es todo. El resto de esta serie es el desglose.
 
 Voy a tomar mi experiencia abriendo Los de Caché y la voy a desarmar por áreas. Una por una, con mis números reales —los de verdad, no ejemplos redondeados— para que quien esté por abrir un negocio de comida no cometa los mismos errores que yo.
 
-Nada de esto es teoría. Es el registro de un negocio que abrí, que cerré y que voy a reabrir bien. Vas a ver las victorias y las regadas, en el mismo tono.
+Nada de esto es teoría. Es el registro de un negocio que abrí y que cerré. Hoy Los de Caché sigue cerrada. Va a reabrir —no sé todavía cuándo— y cuando lo haga va a ser con los números arreglados, no con las ganas. Vas a ver las victorias y las regadas, en el mismo tono.
 
 Empieza por el episodio 1: **cuánto cuesta de verdad tener una taquería abierta**. Ahí están mis gastos fijos completos, incluida la comisión de tarjeta que casi nadie te cuenta, y el número que tengo que vender cada día solo para no perder.
 

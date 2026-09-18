@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Sello from '../components/Sello.astro';
 import EntryCard from '../components/EntryCard.astro';
@@ -10,6 +11,9 @@ import { pilares } from '../data/pilares';
 import { recursos } from '../data/recursos';
 import { numeroDePieza, proximamente } from '../data/bitacora';
 import { pesos, totalFijo, ventaNecesariaDia } from '../data/taqueria';
+import { losDeCache, reelDeArranque } from '../data/redes';
+import { capitulos } from '../data/serie';
+import fotoShua from '../img/shua-taqueria.jpg';
 
 const entradas = (await getCollection('bitacora', (entrada) => !entrada.data.draft)).sort(
   (a, b) =>
@@ -18,6 +22,8 @@ const entradas = (await getCollection('bitacora', (entrada) => !entrada.data.dra
 );
 const recientes = entradas.slice(0, 3);
 const [recursoDestacado] = recursos;
+
+const episodiosPublicados = (await getCollection('serie', (entrada) => !entrada.data.draft)).length;
 ---
 
 <Layout>
@@ -38,32 +44,108 @@ const [recursoDestacado] = recursos;
     </div>
   </section>
 
-  <!-- La taquería: serie destacada -->
-  <section class="px-4 py-10 sm:px-6 sm:py-12">
+  <!-- La taquería: la serie -->
+  <section class="px-4 py-12 sm:px-6 sm:py-16">
     <div class="mx-auto max-w-5xl">
-      <article class="ficha group relative p-6 transition-colors hover:border-brass sm:p-8">
-        <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-          <Sello>Serie en curso · Los de Caché</Sello>
-          <Sello variante="tenue">13 episodios</Sello>
-        </div>
-        <h2
-          class="mt-3 font-mono text-[clamp(1.35rem,3.5vw,2rem)] font-bold leading-snug tracking-tight text-ink"
-        >
-          <a
-            href="/taqueria"
-            class="transition-colors after:absolute after:inset-0 after:content-[''] group-hover:text-brass"
+      <div class="mb-3 h-0.5 w-10 bg-brass" aria-hidden="true"></div>
+      <div class="grid gap-8 md:grid-cols-[1fr_300px] md:gap-12">
+        <div>
+          <div class="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+            <Sello>Serie en curso · {losDeCache.nombre}</Sello>
+            <Sello variante="tenue">
+              {episodiosPublicados} de {capitulos.length} episodios
+            </Sello>
+          </div>
+          <h2
+            class="mt-3 font-mono text-[clamp(1.5rem,3.5vw,2.25rem)] font-bold leading-snug tracking-tight text-ink [text-wrap:balance]"
           >
             Abrí mi taquería y la tuve que cerrar en 3 días
-          </a>
-        </h2>
-        <p class="mt-3 max-w-[65ch] leading-relaxed text-ink-soft">
-          Construyo el software que los negocios usan para no quebrar. Abrí el mío y duró tres
-          días. Estoy desarmando el caso completo, área por área, con mis números reales: {
-            pesos(totalFijo)
-          } de gastos fijos al mes y {pesos(ventaNecesariaDia)} diarios solo para no perder.
-        </p>
-        <p class="mt-5 font-mono text-sm font-medium text-brass">Ver el caso completo →</p>
-      </article>
+          </h2>
+          <p class="mt-4 max-w-[60ch] leading-relaxed text-ink-soft">
+            Llevo años construyendo el software que los negocios usan para no quebrar. Abrí el mío
+            y duró tres días. Cerré antes de irme a la quiebra, en lugar de aguantar perdiendo.
+            Sigue cerrada: reabre cuando los números cierren, no antes.
+          </p>
+          <p class="mt-3 max-w-[60ch] leading-relaxed text-ink-soft">
+            Estoy desarmando el caso completo, área por área, con mis números reales. Sin
+            redondear y sin quitarle lo incómodo.
+          </p>
+
+          <dl class="mt-7 grid grid-cols-3 gap-4 border-y border-rule py-5">
+            <div>
+              <dt class="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+                Duré abierto
+              </dt>
+              <dd
+                class="mt-1 font-mono text-[clamp(1.15rem,3.5vw,1.6rem)] font-bold leading-none tabular-nums text-ink"
+              >
+                3 días
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+                Gasto fijo/mes
+              </dt>
+              <dd
+                class="mt-1 font-mono text-[clamp(1.15rem,3.5vw,1.6rem)] font-bold leading-none tabular-nums text-ink"
+              >
+                {pesos(totalFijo)}
+              </dd>
+            </div>
+            <div>
+              <dt class="font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+                Para no perder
+              </dt>
+              <dd
+                class="mt-1 font-mono text-[clamp(1.15rem,3.5vw,1.6rem)] font-bold leading-none tabular-nums text-brass"
+              >
+                {pesos(ventaNecesariaDia)}<span class="text-sm font-normal">/día</span>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <a
+              href="/taqueria"
+              class="rounded-[2px] bg-brass px-5 py-2.5 font-mono text-sm font-bold text-card transition-colors hover:bg-ink"
+            >
+              Ver el caso completo →
+            </a>
+            <a
+              href={reelDeArranque}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+            >
+              Ver el reel →
+            </a>
+            <a
+              href={losDeCache.sitio}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+            >
+              Conocer {losDeCache.nombre} →
+            </a>
+          </div>
+        </div>
+
+        <figure class="ficha mx-auto w-full max-w-[300px] self-start p-3">
+          <Image
+            src={fotoShua}
+            alt="Shua en la terraza de Los de Caché, en Ladrón de Guevara, Guadalajara"
+            width={300}
+            height={375}
+            widths={[300, 600]}
+            sizes="(max-width: 768px) 300px, 300px"
+            class="aspect-[4/5] w-full border border-rule object-cover"
+            loading="eager"
+          />
+          <figcaption class="mt-3 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+            {losDeCache.nombre} · {losDeCache.estado}
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 

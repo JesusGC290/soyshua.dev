@@ -8,6 +8,7 @@ import LeadForm from '../../components/LeadForm.astro';
 import SeguirCTA from '../../components/SeguirCTA.astro';
 import { capitulos } from '../../data/serie';
 import { pesos, totalFijo, ventaNecesariaDia, ventaNecesariaMes } from '../../data/taqueria';
+import { losDeCache, reelDeArranque } from '../../data/redes';
 
 const publicados = new Set(
   (await getCollection('serie', (entrada) => !entrada.data.draft)).map((entrada) => entrada.id),
@@ -36,13 +37,32 @@ const descripcion = `Abrí mi taquería y la cerré en 3 días. Aquí está el c
         duró tres días. Aquí desarmo el caso completo, área por área, con mis números reales — para
         que si vas a abrir un negocio de comida, no cometas mis errores.
       </p>
-      <p class="mt-5">
+      <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
         <a
           href="/taqueria/abri-mi-taqueria-y-la-cerre-en-3-dias"
-          class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+          class="rounded-[2px] bg-brass px-5 py-2.5 font-mono text-sm font-bold text-card transition-colors hover:bg-ink"
         >
           Leer la historia completa →
         </a>
+        <a
+          href={reelDeArranque}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+        >
+          Ver el reel →
+        </a>
+        <a
+          href={losDeCache.sitio}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="font-mono text-sm font-medium text-brass transition-colors hover:text-ink"
+        >
+          losdecache.com →
+        </a>
+      </div>
+      <p class="mt-5 font-mono text-[0.6875rem] uppercase tracking-[0.1em] text-ink-soft">
+        {losDeCache.nombre} · {losDeCache.estado} — {losDeCache.notaEstado}
       </p>
     </div>
   </section>
